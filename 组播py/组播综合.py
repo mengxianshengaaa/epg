@@ -382,14 +382,15 @@ for line in fileinput.input("a.txt", inplace=True):   #打开临时文件原地�
 
 
 #  获取远程直播源文件
-url = "https://raw.githubusercontent.com/mengxianshengaaa/IPTV/main/json/zhibo.txt"          #源采集地址
+url =       https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u #源采集地址
 r = requests.get(url)
-open('zhibo.txt','wb').write(r.content)         #打开源文件并临时写入
+open('ipv6.txt','wb').write(r.content)         #打开源文件并临时写入
 
 keywords = ['']  # 需要提取的关键字列表，留空则全局选择
 pattern = '|'.join(keywords)  # 创建正则表达式模式，匹配任意一个关键字
 #pattern = r"^(.*?),(?!#genre#)(.*?)$" #去掉genre行直接复制
-with open('zhibo.txt', 'r', encoding='utf-8') as file, open('TT.txt', 'w', encoding='utf-8') as TT:
+with open('ipv6.txt
+    ','r', encoding='utf-8') as file, open('TT.txt', 'w', encoding='utf-8') as TT:
     #TT.write('\n央视频道,#genre#\n')
     for line in file:
         if re.search(pattern, line):  # 如果行中有任意关键字
