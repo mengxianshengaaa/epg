@@ -45,6 +45,12 @@ HBO,http://avd.iptviptv.site:9694/hls/1001/index.m3u8
 翡翠台,http://i2.ekesh.cn:4001/rtp/239.12.22.121:10001
 明珠台,http://i2.ekesh.cn:4001/rtp/239.12.22.122:10001
 新视觉,http://i2.ekesh.cn:4001/rtp/239.12.22.33:10001
+翡翠台&多音轨, http://zsntlqj.xicp.net:8895/bysid/1.m3u8
+ViuTVsix&多音轨, http://zsntlqj.xicp.net:8895/bysid/96.m3u8
+ViuTV&多音轨, http://zsntlqj.xicp.net:8895/bysid/99.m3u8
+明珠台&多音轨, http://zsntlqj.xicp.net:8896/bysid/2.m3u8
+TVB Plus&多音轨, http://zsntlqj.xicp.net:8896/bysid/82.m3u8
+无线新闻台&多音轨, http://zsntlqj.xicp.net:8896/bysid/83.m3u8
 重温经典,http://cg12.hunancatv.cn:9090/live/CWJD.m3u8?deviceid=866265039837531&sid=Yp6brv0MWYukAl4oJr9yrw%3D%3D&nonce=Ri1TgJg9dlAK&acl=0111&hlsSessionID=1503359536318867014&srchost=172.16.22.158:8060&gid=OHehEP1KV9FqguWiPXrX6Q%3D%3D
 重温经典,http://yzcg.jydjd.top:2902/udp/224.1.100.126:11111
 南国都市4K,http://tencentplay.gztv.com/live/nanguodushi.m3u8?txSecret=140110ae3d6c936a77f94c4f4d85b0d3&txTime=18d57929bd4
