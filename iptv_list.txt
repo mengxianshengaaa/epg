@@ -59,7 +59,6 @@ TVB Plus&多音轨, http://zsntlqj.xicp.net:8896/bysid/82.m3u8
 广东珠江,http://avd.iptviptv.site:9694/hls/451/index.m3u8
 广东珠江,http://i2.ekesh.cn:4001/rtp/239.12.22.84:10001
 广东新闻,http://58.254.14.34:808/hls/52/index.m3u8
-广东新闻,http://avd.iptviptv.site:9694/hls/454/index.m3u8
 广东民生,http://58.254.14.34:808/hls/58/index.m3u8
 广东民生,http://avd.iptviptv.site:9694/hls/455/index.m3u8
 广东影视,http://58.254.14.34:808/hls/53/index.m3u8
