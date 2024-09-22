@@ -51,12 +51,12 @@ jobs:
 
 
 
-      - name: Run iptv
-        run: python ${{ github.workspace }}/酒店源采集/ZHGX.py 
       #- name: Run iptv
-        #run: python ${{ github.workspace }}/组播py/测试组播运营商.py 
+        #run: python ${{ github.workspace }}/酒店源采集/ZHGX.py 
       - name: Run iptv
-        run: python ${{ github.workspace }}/组播py/txt加运行时间酒店.py 
+        run: python ${{ github.workspace }}/组播py/TXT转M3U.py 
+     # - name: Run iptv
+       # run: python ${{ github.workspace }}/组播py/txt加运行时间酒店.py 
      
       - name: 提交更改
         run: |
