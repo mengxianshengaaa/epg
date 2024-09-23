@@ -2,6 +2,10 @@ import datetime
 
 
 def txt_to_m3u(input_file, output_file):
+    # 获取当前 UTC 时间并转换为北京时间
+    now = datetime.datetime.now(datetime.UTC).astimezone(datetime.timezone(datetime.timedelta(hours=8)))
+    current_time = now.strftime("%m-%d %H:%M")
+
     try:
         # 读取 txt 文件内容
         with open(input_file, 'r', encoding='utf-8') as f:
@@ -10,9 +14,6 @@ def txt_to_m3u(input_file, output_file):
         print(f"文件 {input_file} 不存在。")
         return
 
-    # 打开 m3u 文件并写入内容
-    now = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
-    current_time = now.strftime("%m-%d %H:%M")
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write('#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"\n')
@@ -24,12 +25,11 @@ def txt_to_m3u(input_file, output_file):
             # 遍历 txt 文件内容
             for line in lines:
                 line = line.strip()
-                if "," in line:  # 防止文件里面缺失",”号报错
+                if "," in line:
                     channel_name, channel_url = line.split(',', 1)
                     if channel_url == '#genre#':
                         genre = channel_name
                     else:
-                        # 将频道信息写入 m3u 文件
                         f.write(f'#EXTINF:-1 tvg-id="{channel_name}" tvg-name="{channel_name}" tvg-logo="https://live.fanmingming.com/tv/{channel_name}.png" group-title="{genre}",{channel_name}\n')
                         f.write(f'{channel_url}\n')
     except IOError:
