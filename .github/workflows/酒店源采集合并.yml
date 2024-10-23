@@ -1,7 +1,7 @@
 name: 酒店源采集合并
 
 on:
-  s#chedule:
+  #schedule:
    # - cron: '10 0/24 * * *'        #这里更改自动运行的时间，没这两行的话只能手动运行
   workflow_dispatch:
     分支:
