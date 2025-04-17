@@ -1,5 +1,7 @@
-import requests
-
+import os
+if not os.path.exists(os.path.dirname(save_path)):
+    os.makedirs(os.path.dirname(save_path))
+    
 def download_file(url, save_path):
     response = requests.get(url, stream=True)
     response.raise_for_status()
