@@ -1,18 +1,24 @@
+import requests
 import os
-if not os.path.exists(os.path.dirname(save_path)):
-    os.makedirs(os.path.dirname(save_path))
-    
-def download_file(url, save_path):
-    response = requests.get(url, stream=True)
-    response.raise_for_status()
-    with open(save_path, 'wb') as file:
-        for chunk in response.iter_content(chunk_size=8192):
-            file.write(chunk)
 
-url = 'https://epg.112114.xyz/pp.xml'
-save_path = 'epg.xml'
-download_file(url, save_path)
+# 要下载的文件链接
+url = "https://epg.112114.xyz/pp.xml"
 
-        print(f"文件 {file} 不存在，跳过删除。")
+# 下载文件
+response = requests.get(url)
+if response.status_code == 200:
+    # 保存文件名
+    file_name = os.path.basename(url)
+    with open(file_name, 'wb') as file:
+        file.write(response.content)
+    print(f"{file_name} 下载成功。")
 
-print("任务运行完毕，分类频道列表可查看文件夹内iptv_list.txt文件！")
+    # 假设你已经在本地初始化了一个 Git 仓库，并且当前目录是仓库目录
+    # 执行 Git 命令添加文件
+    os.system(f"git add {file_name}")
+    # 执行 Git 命令提交文件
+    os.system(f'git commit -m "Add {file_name}"')
+    # 执行 Git 命令推送文件到远程仓库（请确保已经配置好远程仓库地址）
+    os.system("git push")
+else:
+    print(f"下载失败，状态码: {response.status_code}")
