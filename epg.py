@@ -1,18 +1,27 @@
-from urllib.request import Request, urlopen
+import requests
+import os
 
+# 要下载的文件链接
 urls = [
-    "https://epg.112114.xyz/pp.xml" # 你可以替换为实际需要的链接
+    "https://epg.112114.xyz/pp.xml"
 ]
 
-# 遍历URL列表，下载文件
 for url in urls:
-    try:
-        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'})
-        with urlopen(req, timeout=10) as response:  # 设置超时时间为10秒
-            data = response.read()
-            file_name = url.split('/')[-1]  # 从URL中获取文件名
-            with open(file_name, 'wb') as file:
-                file.write(data)
-            print(f"成功下载文件: {file_name} 来自 {url}")
-    except Exception as e:
-        print(f"下载文件时出错: {e} 对于URL: {url}")
+    # 下载文件
+    response = requests.get(url)
+    if response.status_code == 200:
+        # 保存文件名
+        file_name = os.path.basename(url)
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
+        print(f"{file_name} 下载成功。")
+
+        # 假设你已经在本地初始化了一个 Git 仓库，并且当前目录是仓库目录
+        # 执行 Git 命令添加文件
+        os.system(f"git add {file_name}")
+        # 执行 Git 命令提交文件
+        os.system(f'git commit -m "Add {file_name}"')
+        # 执行 Git 命令推送文件到远程仓库（请确保已经配置好远程仓库地址）
+        os.system("git push")
+    else:
+        print(f"下载失败，状态码: {response.status_code}")
