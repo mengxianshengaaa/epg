@@ -22,3 +22,4 @@ for url in urls:
             print(f"下载失败，状态码: {response.status_code}")
     except requests.RequestException as e:
         print(f"下载 {url} 时发生网络错误: {e}")
+        
