@@ -1,7 +1,7 @@
 from urllib.request import Request, urlopen
 
 urls = [
-    "https://epg.112114.xyz/pp.xml.gz" # 你可以替换为实际需要的链接
+    "https://epg.112114.xyz/pp.xml" # 你可以替换为实际需要的链接
 ]
 
 # 遍历URL列表，下载文件
