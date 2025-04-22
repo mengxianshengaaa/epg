@@ -1,12 +1,13 @@
 name: epg酒店源采集合并
 
+
 on:
   schedule:
-    - cron: '5 */3 * * *'        #这里更改自动运行的时间，没这两行的话只能手动运行
+    - cron: '5 */3 * * *'      #这里更改自动运行的时间，没这两行的话只能手动运行#酒店源1.py 
   workflow_dispatch:
     分支:
       - main
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,29 +22,20 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install selenium requests futures eventlet
-      - name: Install dependencies
-        run: pip install replace
-      - name: Install dependencies
-        run: pip install input
-      - name: Install dependencies
-        run: pip install pytz
-      - name: Install dependencies
-        run: pip install lxml
-
-
-        
-      - name: Run iptv
-        run: python ${{ github.workspace }}/epg.py     #这里更改要运行的py
-      
-        
-
+        run: |
+          pip install --upgrade pip
+          pip install selenium requests futures eventlet opencv-python Beautifulsoup4 translate termcolor func_timeout replace input opencc pypinyin pytz tqdm
+      - name: Run py
+        run: | 
+          python ${{ github.workspace }}/py/epg.py      
       - name: 提交更改
         run: |
-          git config --local user.email "actions@126.com"
+          git config --local user.email "actions@163.com"
           git config --local user.name "GitHub Action"
+          #git reset --hard origin/main
           git add .
-          git commit *.xml -m "Add generated file"
+          git commit -m "Add generated file"
+          #git commit *.txt -m "Add generated file"
           #git commit *.m3u -m "Add generated file"
           #git pull --rebase
           git push -f
