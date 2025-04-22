@@ -1,25 +1,19 @@
-import requests
-import os
+from urllib.request import Request, urlopen
 
 urls = [
-    "https://epg.112114.xyz/pp.xml",
     "https://epg.112114.xyz/pp.xml.gz"
 ]
 
+downloaded_file_name = "pp.xml.gz"
+
+# 遍历URL列表，下载文件
 for url in urls:
     try:
-        response = requests.get(url, timeout=10)
-        if response.status_code == 200:
-            file_name = os.path.basename(url)
-            with open(file_name, 'wb') as file:
-                file.write(response.content)
-            file_size = os.path.getsize(file_name)
-            if file_size > 0:
-                print(f"{file_name} 下载成功，文件大小: {file_size} 字节。")
-            else:
-                print(f"{file_name} 下载可能失败，文件大小为 0 字节。")
-        else:
-            print(f"下载失败，状态码: {response.status_code}")
-    except requests.RequestException as e:
-        print(f"下载 {url} 时发生网络错误: {e}")
-        
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'})
+        with urlopen(req) as response:
+            data = response.read()
+            with open(downloaded_file_name, 'wb') as file:
+                file.write(data)
+            print(f"成功下载文件: {downloaded_file_name} 来自 {url}")
+    except Exception as e:
+        print(f"下载文件时出错: {e} 对于URL: {url}")
