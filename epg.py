@@ -2,7 +2,7 @@ import requests
 import os
 
 # 要下载的文件链接
-urls = ["https://epg.112114.xyz/pp.xml", "https://epg.112114.xyz/pp.xml.gz"]
+urls = ["https://epg.112114.xyz/pp.xml.gz"]
 
 for url in urls:
     # 下载文件
