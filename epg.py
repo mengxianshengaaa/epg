@@ -5,9 +5,8 @@ from datetime import datetime
 
 # 要下载的文件链接
 urls = [
-    "https://epg.112114.xyz/pp.xml",
     "https://epg.pw/xmltv/epg_HK.xml",
-    "https://epg.pw/xmltv/epg_TW.xml"
+    "https://epg.pw/xmltv/epg_TW.xml",
     "https://epg.pw/xmltv/epg_CN.xml"	
 ]
 
@@ -27,49 +26,25 @@ for url in urls:
         print(f"{file_name} 下载成功。")
         downloaded_files.append(file_name)
         
-        # 执行Git操作
-        os.system(f"git add {file_name}")
-        os.system(f'git commit -m "Add {file_name}"')
-        
     except requests.exceptions.RequestException as e:
         print(f"下载失败: {e}")
     except Exception as e:
         print(f"发生错误: {e}")
 
-# 合并XML文件（如果有多个下载文件）
-if len(downloaded_files) > 1:
+# 批量提交所有下载文件到Git
+if downloaded_files:
     try:
-        # 创建新的根节点
-        new_root = ET.Element("tv")
-        
-        # 添加生成信息
-        info = ET.SubElement(new_root, "info")
-        info.set("generator", "EPG_Merger")
-        info.set("created", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        
-        # 合并所有文件的内容
+        # 添加所有下载的文件
         for file in downloaded_files:
-            tree = ET.parse(file)
-            root = tree.getroot()
-            
-            # 将每个文件中的channel和programme节点添加到新的根节点
-            for channel in root.findall("channel"):
-                new_root.append(channel)
-            for programme in root.findall("programme"):
-                new_root.append(programme)
+            os.system(f"git add {file}")
         
-        # 保存合并后的文件
-        merged_file = "pp.xml"
-        new_tree = ET.ElementTree(new_root)
-        new_tree.write(merged_file, encoding="utf-8", xml_declaration=True)
-        print(f"合并文件 {merged_file} 已生成。")
-        
-        # 提交合并文件到Git
-        os.system(f"git add {merged_file}")
-        os.system(f'git commit -m "Merge EPG files into 123.xml"')
+        # 提交并推送到远程仓库
+        commit_msg = f"Download EPG files on {datetime.now().strftime('%Y-%m-%d')}"
+        os.system(f'git commit -m "{commit_msg}"')
         os.system("git push")
+        print(f"已将 {len(downloaded_files)} 个文件提交到Git仓库")
         
     except Exception as e:
-        print(f"合并文件时出错: {e}")
+        print(f"Git操作出错: {e}")
 else:
-    print("没有足够的文件进行合并。")
+    print("没有文件被下载，无法执行Git操作")
