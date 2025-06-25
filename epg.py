@@ -5,8 +5,7 @@ from datetime import datetime
 
 # 要下载的文件链接
 urls = [
-    "https://epg.112114.xyz/pp.xml",
-    "https://epg.pw/xmltv/epg.xml"
+    "https://epg.112114.xyz/pp.xml"
 ]
 
 # 存储下载的文件路径
